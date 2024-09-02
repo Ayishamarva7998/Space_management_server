@@ -1,13 +1,14 @@
 import express from "express"
 import mongoose from "mongoose"
 import Dotenv from "dotenv"
+import cors from "cors"
 
 
 
 Dotenv.config()
 const Server = express()
 
-
+Server.use(cors())
 
 
 
