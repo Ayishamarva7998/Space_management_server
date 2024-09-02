@@ -9,6 +9,7 @@ Dotenv.config()
 const Server = express()
 
 Server.use(cors())
+Server.apply()
 
 
 
