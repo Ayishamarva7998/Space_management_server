@@ -16,9 +16,6 @@ export const login = async (req,res)=>{
           return res.status(404).json({message:"Not found the Admin"});
         };
 
-
-   
-
         return res.status(201).json({message:"logged successfully",token:genarate_admin_token(admin)})
       
       
