@@ -11,7 +11,12 @@ Dotenv.config()
 const server = express()
 server.use(express.json())
 
-server.use(cors())
+server.use(cors({
+    origin:'https://space-management.vercel.app'
+}))
+
+
+
 
 
 
