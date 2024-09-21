@@ -2,8 +2,8 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
-const admin_secret = process.env.admin_secret_key;
-const staff_secret = process.env.staff_secret_key;
+const admin_secret = process.env.admin_secret_key || '12345abcd';
+const staff_secret = process.env.staff_secret_key || 'abcd12345';
 
 const genarate_admin_token = (admin) => {
   return jwt.sign({ id: admin._id, role: "admin" }, admin_secret, {
