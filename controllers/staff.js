@@ -103,37 +103,26 @@ export const createStaff = async (req, res) => {
   }
 };
 
+
+
+
 export const updatestaff = async (req, res) => {
   try {
     const staffId = req.params.id;
+ 
+    
     const staff1 = await Staff.findById(staffId);
+  
     const {
       firstname,
       lastname,
-      dateofbirth,
       email,
-      phonenumber,
-      education,
-      address,
       role,
       badgecolor,
       batch,
     } = req.body;
 
-    if (
-      !firstname ||
-      !lastname ||
-      !dateofbirth ||
-      !email ||
-      !phonenumber ||
-      !education ||
-      !address ||
-      !role ||
-      !badgecolor ||
-      !batch
-    ) {
-      return res.status(400).json({ message: "Missing required fields" });
-    }
+
 
     const existingStaff = await Staff.findOne({
       _id: staffId,
@@ -161,11 +150,7 @@ export const updatestaff = async (req, res) => {
       {
         firstname,
         lastname,
-        dateofbirth,
         email,
-        phonenumber,
-        education,
-        address,
         role,
         badgecolor,
         batch,
@@ -189,15 +174,24 @@ export const updatestaff = async (req, res) => {
   }
 };
 
+
+
+
+
+
+
 export const getallstaff = async (req, res) => {
-  const staff = await Staff.find();
+  const staff = await Staff.find({is_delete:false});
 
   if (staff.length > 0) {
     return res.status(200).json({ message: staff });
   } else {
-    res.status(404).json({ message: "No staffs found", staff: [] });
+    res.status(200).json({  message
+      : [] });
   }
 };
+
+
 
 export const staff = async (req, res) => {
   const staffid = req.params.id;
@@ -213,13 +207,19 @@ export const staff = async (req, res) => {
   }
 };
 
-export const deletestaff = async (req, res) => {
-  const { id } = req.params;
-  const delete_staff = await Staff.findById(id);
-  if (!delete_staff) {
-    return res.status(404).json({ message: "staff not found" });
+
+export const delete_staff =  async(req,res)=>{
+
+  const id = req.params.id
+  const deletedstaff =  await Staff.findById(id)
+  if(!deletedstaff){
+    return res.status(404).json({message:"Staff not found"})
   }
-  delete_staff.is_delete = true;
-  await delete_staff.save();
-  return res.status(200).json({ message: "staff deleted successfully" });
-};
+
+  deletedstaff.is_delete = true
+  await deletedstaff.save()
+  return res.status(200).json({ message:"staff deleted sucessfully", deletedstaff})
+}
+
+
+
