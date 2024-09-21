@@ -1,5 +1,5 @@
 import { Admin } from "../models/admin.js";
-// import { genarate_admin_token } from "../utils/jwt.js";
+import { genarate_admin_token } from "../utils/jwt.js";
 
 export const login = async (req,res)=>{
     const {email,password}=req.body;
@@ -16,9 +16,31 @@ export const login = async (req,res)=>{
         if(!admin){
           return res.status(404).json({message:"Not found the Admin"});
         };
-
-        return res.status(201).json({message:"logged successfully"})
-        // return res.status(201).json({message:"logged successfully",token:genarate_admin_token(admin)})
+         const  import jwt from "jsonwebtoken"
+         import dotenv from 'dotenv';
+         
+         
+         dotenv.config()
+         const admin_secret = process.env.admin_secret_key;
+         const staff_secret = process.env.staff_secret_key;
+         
+         const genarate_admin_token = (admin) => {
+             return jwt.sign({ id: admin._id, role: 'admin' }, admin_secret, { expiresIn: '1h' });
+           };
+         
+         
+           const verifyadmintoken = (token) => {
+             
+             try {
+               return jwt.verify(token,admin_secret);
+             } catch (error) {
+               return null;
+             }
+           };
+         
+         
+       const token = genarate_admin_token(admin);
+        return res.status(201).json({message:"logged successfully",token})
       
       
     } catch (error) {

@@ -11,6 +11,4 @@ route.get("/staff",getallstaff)
 route.get("/staff/:id",staff)
 route.delete("/staff/:id",delete_staff)
 
-
-
 export default route
