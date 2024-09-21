@@ -14,11 +14,11 @@ const upload = multer();
 server.use(express.json());
 
 server.use(cors());
-server.use(
-  cors({
-    origin: "https://space-management.vercel.app",
-  })
-);
+// server.use(
+//   cors({
+//     origin: "https://space-management.vercel.app",
+//   })
+// );
 
 server.use("/api/admin", adminroute);
 server.use("/api", loginroute);
