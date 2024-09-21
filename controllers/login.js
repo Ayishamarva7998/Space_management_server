@@ -17,7 +17,7 @@ export const login = async (req, res) => {
     const token = genarate_admin_token(admin);
     return res.status(201).json({ message: "logged successfully", token });
   } catch (error) {
-    console.error("Error during login:", error);
-    return res.status(500).json({ message: "internal error" });
+    
+    return res.status(500).json({ message: "internal error",error });
   }
 };
