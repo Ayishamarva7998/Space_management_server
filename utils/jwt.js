@@ -12,7 +12,6 @@ const genarate_admin_token = (admin) => {
 
 
   const verifyadmintoken = (token) => {
-    console.log(token);
     
     try {
       return jwt.verify(token,admin_secret);

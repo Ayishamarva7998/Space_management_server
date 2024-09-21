@@ -3,6 +3,7 @@ import { genarate_admin_token } from "../utils/jwt.js";
 
 export const login = async (req,res)=>{
     const {email,password}=req.body;
+    
     try {
 
         if(!email || !password){
@@ -21,5 +22,7 @@ export const login = async (req,res)=>{
       
     } catch (error) {
         return res.status(404).json({message:error})
+        console.log(error);
+        
     }
 }
