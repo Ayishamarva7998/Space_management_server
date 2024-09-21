@@ -103,26 +103,13 @@ export const createStaff = async (req, res) => {
   }
 };
 
-
-
-
 export const updatestaff = async (req, res) => {
   try {
     const staffId = req.params.id;
- 
-    
+
     const staff1 = await Staff.findById(staffId);
-  
-    const {
-      firstname,
-      lastname,
-      email,
-      role,
-      badgecolor,
-      batch,
-    } = req.body;
 
-
+    const { firstname, lastname, email, role, badgecolor, batch } = req.body;
 
     const existingStaff = await Staff.findOne({
       _id: staffId,
@@ -174,24 +161,15 @@ export const updatestaff = async (req, res) => {
   }
 };
 
-
-
-
-
-
-
 export const getallstaff = async (req, res) => {
-  const staff = await Staff.find({is_delete:false});
+  const staff = await Staff.find({ is_delete: false });
 
   if (staff.length > 0) {
     return res.status(200).json({ message: staff });
   } else {
-    res.status(200).json({  message
-      : [] });
+    res.status(200).json({ message: [] });
   }
 };
-
-
 
 export const staff = async (req, res) => {
   const staffid = req.params.id;
@@ -207,19 +185,16 @@ export const staff = async (req, res) => {
   }
 };
 
-
-export const delete_staff =  async(req,res)=>{
-
-  const id = req.params.id
-  const deletedstaff =  await Staff.findById(id)
-  if(!deletedstaff){
-    return res.status(404).json({message:"Staff not found"})
+export const delete_staff = async (req, res) => {
+  const id = req.params.id;
+  const deletedstaff = await Staff.findById(id);
+  if (!deletedstaff) {
+    return res.status(404).json({ message: "Staff not found" });
   }
 
-  deletedstaff.is_delete = true
-  await deletedstaff.save()
-  return res.status(200).json({ message:"staff deleted sucessfully", deletedstaff})
-}
-
-
-
+  deletedstaff.is_delete = true;
+  await deletedstaff.save();
+  return res
+    .status(200)
+    .json({ message: "staff deleted sucessfully", deletedstaff });
+};
