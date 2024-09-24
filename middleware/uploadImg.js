@@ -1,3 +1,4 @@
+"use strict"
 import cloudinary from "cloudinary";
 import multer from "multer";
 import dotenv from "dotenv";

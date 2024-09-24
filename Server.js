@@ -1,3 +1,4 @@
+"use strict"
 import express from "express";
 import mongoose from "mongoose";
 import Dotenv from "dotenv";
@@ -6,6 +7,7 @@ import multer from "multer";
 import adminroute from "./routes/admin_route.js";
 import loginroute from "./routes/auth.js";
 import staffroute from "./routes/staff_route.js";
+import { errorHandler } from "./middleware/error_middleware.js";
 
 Dotenv.config();
 const server = express();
@@ -23,6 +25,7 @@ server.use(cors());
 server.use("/api/admin", adminroute);
 server.use("/api", loginroute);
 server.use("/api", staffroute);
+server.use(errorHandler)
 
 // Local Host
 const PORT = process.env.PORT;
