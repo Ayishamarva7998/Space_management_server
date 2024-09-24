@@ -1,3 +1,4 @@
+"use strict"
 import { Staff } from "../models/staff.js";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
@@ -8,7 +9,7 @@ import cloudinary from "cloudinary";
 dotenv.config();
 
 export const createStaff = async (req, res) => {
-  try {
+
     const {
       firstname,
       lastname,
@@ -96,15 +97,11 @@ export const createStaff = async (req, res) => {
     });
 
     res.status(201).json({ message: "Staff created successfully" });
-  } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error adding new staff", error: error.message });
-  }
+
 };
 
 export const updatestaff = async (req, res) => {
-  try {
+
     const staffId = req.params.id;
 
     const staff1 = await Staff.findById(staffId);
@@ -153,15 +150,11 @@ export const updatestaff = async (req, res) => {
     res
       .status(200)
       .json({ message: "Staff updated successfully", staff: updatedStaff });
-  } catch (error) {
-    console.error("Error:", error);
-    res
-      .status(500)
-      .json({ message: "Error updating staff", error: error.message });
-  }
+
 };
 
 export const getallstaff = async (req, res) => {
+  
   const staff = await Staff.find({ is_delete: false });
 
   if (staff.length > 0) {
@@ -171,19 +164,19 @@ export const getallstaff = async (req, res) => {
   }
 };
 
-export const staff = async (req, res) => {
-  const staffid = req.params.id;
+// export const staff = async (req, res) => {
+//   const staffid = req.params.id;
 
-  const staffone = await Staff.findById(staffid);
+//   const staffone = await Staff.findById(staffid);
 
-  if (!staffone) {
-    return res.status(404).json({ message: "Staff not found" });
-  } else {
-    return res
-      .status(200)
-      .json({ message: "Staff data fetched succussfully", staffone });
-  }
-};
+//   if (!staffone) {
+//     return res.status(404).json({ message: "Staff not found" });
+//   } else {
+//     return res
+//       .status(200)
+//       .json({ message: "Staff data fetched succussfully", staffone });
+//   }
+// };
 
 export const delete_staff = async (req, res) => {
   const id = req.params.id;
